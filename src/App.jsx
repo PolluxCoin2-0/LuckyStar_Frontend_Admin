@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { OTP, Signup, Wallet, BiddingPage, Dashboard } from "./pages";
+import { Wallet, BiddingPage, Dashboard } from "./pages";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
 import { ToastContainer, Zoom } from "react-toastify";
@@ -25,8 +25,6 @@ function App() {
           />
           <Routes>
             <Route path="/" element={<BiddingPage />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/otp" element={<OTP />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
           </Routes>

@@ -37,15 +37,12 @@ const Wallet = () => {
       const dataArray = await getPolinkweb();
       if (dataArray?.wallet_address) {
         const apiData = await connectWallet(dataArray?.wallet_address);
+        console.log(apiData)
         if(apiData?.statusCode==200){
          dispatch(setToken(apiData?.data?.token));
-         dispatch(setBalanceUSDX(dataArray?.USDX))
          dispatch(setWalletAddress(dataArray?.wallet_address))
          dispatch(setSignup(!signupStatus));
           navigate("/")
-        }else{
-          toast.error("Wallet address is not registered.")
-          navigate("/signup")
         }
       }
     } catch (error) {

@@ -4,6 +4,7 @@ import {
   getApproval,
   startBidding,
   stimulateWinningNumber,
+  submitWinningNumber,
 } from "../../utils/Axios";
 import { useState } from "react";
 
@@ -11,6 +12,7 @@ const BiddingPage = () => {
   const walletAddress = useSelector((state) => state.wallet.address);
   const token = useSelector((state) => state.wallet.token);
   const [winningNo, setWinningNo] = useState(0);
+  const [stimulateWinningNumberData, setStimulateWinningNumberData] = useState(0);
 
   const handleStartBidding = async () => {
     const apiData = await startBidding(token);
@@ -35,7 +37,7 @@ const BiddingPage = () => {
     const apiData = await stimulateWinningNumber(winningNo, token);
     console.log(apiData);
 
-    const transaction = await getApproval(walletAddress, apiData?.amount);
+    const transaction = await getApproval(walletAddress, apiData?.data);
 
     const signedTransaction1 = await window.pox.signdata(
       transaction?.data?.transaction
@@ -43,6 +45,16 @@ const BiddingPage = () => {
 
     JSON.stringify(
       await window.pox.broadcast(JSON.parse(signedTransaction1[1]))
+    );
+
+    const apiDataWinningNumber = await submitWinningNumber(winningNo, walletAddress, token)
+    console.log("submitWinningNumber", apiDataWinningNumber);
+    const signedTransaction2 = await window.pox.signdata(
+      apiDataWinningNumber?.data?.transaction
+    );
+
+    JSON.stringify(
+      await window.pox.broadcast(JSON.parse(signedTransaction2[1]))
     );
   };
 
@@ -86,21 +98,22 @@ const BiddingPage = () => {
           />
         </div>
 
-        <div>
+        <div>   
           <button
             className="w-96 py-3 font-semibold mt-10 bg-black text-white rounded-md hover:bg-[#1d1d1d] focus:outline-none"
             onClick={handleWinningNumber}
           >
-            Start Bidding
+            Submit Winning Number
           </button>
         </div>
 
-        <div>
-          <p className="font-semibold text-xl mt-10 w-64 bg-gray-100 border-gray-200 border-[1px] rounded-md py-[10px] px-2 text-center text-gray-600">
-            Stimulate
+        <div className="w-full">
+          <p className="font-semibold text-xl mt-10 w-[40%] whitespace-nowrap bg-gray-100 border-gray-200 border-[1px] rounded-md py-[10px] px-2 text-center text-gray-600">
+          {stimulateWinningNumberData && stimulateWinningNumberData}
           </p>
         </div>
       </div>
+      
     </div>
   );
 };
