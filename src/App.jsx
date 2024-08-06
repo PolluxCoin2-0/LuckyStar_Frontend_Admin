@@ -1,11 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import {
-  OTP,
-  Signup,
-  Wallet,
-  BiddingPage,
-  Dashboard,
-} from "./pages";
+import { OTP, Signup, Wallet, BiddingPage, Dashboard } from "./pages";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
 import { ToastContainer, Zoom } from "react-toastify";

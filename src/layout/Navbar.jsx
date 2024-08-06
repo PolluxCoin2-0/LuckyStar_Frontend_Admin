@@ -78,14 +78,6 @@ const Navbar = () => {
               {walletAddress.length>0 ? truncateString(walletAddress):"Connect Wallet"}
             </button>
             </Link>
-
-          {isUserSignup && (
-            <Link to="/user">
-              <div className="cursor-pointer">
-                <FaUserCircle color="white" size={28} />
-              </div>
-            </Link>
-          )}
         </div>
       </div>
 
@@ -108,14 +100,6 @@ const Navbar = () => {
 
         {showNavbar && (
           <div className="flex flex-col w-[200px] bg-white text-black py-4 space-y-4 absolute top-16 right-4 z-20 rounded-lg shadow-lg">
-            {isUserSignup && (
-              <Link
-                to="/user"
-                className="px-4 py-2  hover:bg-gray-200 rounded-lg transition"
-              >
-                <FaUserCircle size={28} />
-              </Link>
-            )}
             <Link
               to="/admin/dashboard"
               className="px-4 py-2 font-semibold hover:bg-gray-200 rounded-lg transition"

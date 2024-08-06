@@ -46,59 +46,6 @@ export const connectWallet = async (walletAddress) => {
   }
 };
 
-// BET >> PLACE BID
-export const placeBid = async (placeBidData, walletAddress, token) => {
-
-  try {
-    const res = await axios.post(BASE_URL + "/placeBidMethod", {
-      walletAddress: walletAddress,
-      amount: placeBidData?.minimumBid,
-      number: placeBidData?.bidNo,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return res?.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-// SENSEX CHART API
-export const sensexChartData = async (today, yesterday) => {
-  try {
-    const res = await axios.get(
-      `${BASE_URL}/proxy?today=${today}&yesterday=${yesterday}`
-    );
-    return res?.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-// GET WINNING BALANCE OF THE USER
-export const getWinningBalance = async (walletAddress, token) => {
-  try {
-    const res = await axios.post(
-      BASE_URL + "/getTotalWinning",
-      {
-        walletAddress: walletAddress,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    return res?.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 //  SIGNOUT
 export const signout = async (token) => {
   try {
@@ -113,15 +60,68 @@ export const signout = async (token) => {
   }
 };
 
-// GET FAQs LIST
-export const getFAQsList = async () => {
+// START BIDDING
+export const startBidding = async (token) => {
   try {
-    const res = await axios.get(BASE_URL + "/getFaq");
+    const res = await axios.post(BASE_URL + "/startBiddingAdmin", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res?.data;
   } catch (error) {
     console.log(error);
   }
 };
+
+// END BIDDING
+export const endBidding = async (walletAddress, token) => {
+  try {
+    const res = await axios.post(
+      BASE_URL + "/endBiddingAdmin",
+      {
+        walletAddress: walletAddress,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return res?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// SUMBIT WINNING NUMBER
+export const submitWinningNumber = async(winningNo, walletAddress)=>{
+  try {
+    const res = await axios.post(BASE_URL + "/submitWinningNumberAdmin",{
+       "number": winningNo,
+    "walletAddress": walletAddress
+    })
+    return res?.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// STIMULATE WINNING NUMBER
+export const stimulateWinningNumber = async(winningNo, token)=>{
+  try {
+    const res = await axios.post(BASE_URL + "/simulateWinningNumberAdmin",{
+       "number": winningNo,
+    },{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res?.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // GET APPROVAL
 export const getApproval = async (walletAddress, amount) => {
@@ -136,30 +136,70 @@ export const getApproval = async (walletAddress, amount) => {
   }
 };
 
-// GET TOTAL WINNING COUNT
-export const getWinningCount = async()=>{
+// GET ALL USERS
+export const getAllUsers = async (token)=>{
   try {
-    const res = await axios.get(BASE_URL + "/getWinnerCountMethod");
+    const res = await axios.get(BASE_URL + "/getAllUser",{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     return res?.data;
   } catch (error) {
     console.log(error);
   }
 }
 
-// GET WINNERS BY INDEX
-export const getWinnersByIndex = async(index)=>{
+// GET USER BY ID
+export const getUserById = async(id, token)=>{
   try {
-    const res = await axios.get(BASE_URL + `getWinners/${index}`)
+    const res = await axios.get(BASE_URL + `/getUserById/${id}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     return res?.data;
   } catch (error) {
     console.log(error)
   }
 }
 
-// GET CURRENY BIDDING LIST
-export const getBiddingList = async()=>{
+// USER BLOCK AND UNBLOCK
+export const getUserBlockAndUnblock = async(id, token)=>{
   try {
-    const res = await axios.get(BASE_URL + "/getCurrentBidding");
+    const res = await axios.get(BASE_URL + `/blockUnblockUser/${id}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res?.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// DELETE THE USER
+export const getUserDelete = async(id, token)=>{
+  try {
+    const res = await axios.delete(BASE_URL + `/deleteUser/${id}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res?.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// UPDATE USER DETAILS
+export const getUserDetailsUpdate= async(token)=>{
+  try {
+    const res = await axios.put(BASE_URL + "/updateUser",{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     return res?.data;
   } catch (error) {
     console.log(error)
