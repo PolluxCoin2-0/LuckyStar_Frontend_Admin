@@ -2,43 +2,11 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-// SIGNUP
-export const postSignup = async (formData) => {
-  try {
-    const res = await axios.post(BASE_URL + "/signup", {
-      email: formData.email,
-      referredBy: formData.referral,
-      phone: formData.phone,
-      countryCode: formData.countryCode,
-      city: formData.city,
-      state: formData.state,
-      zipCode: formData.zipCode,
-      walletAddress: formData.walletAddress,
-    });
-    return res.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-// VERIFY OTP
-export const verifyOtp = async (email, otp) => {
-  try {
-    const res = await axios.post(BASE_URL + "/VerifyOtp", {
-      email: email,
-      otp: otp,
-    });
-    return res.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 // LOGIN
 export const connectWallet = async (walletAddress) => {
   try {
-    const res = await axios.post(BASE_URL + "/login", {
-      walletAddress: walletAddress,
+    const res = await axios.post(BASE_URL + "/signIn", {
+      adminAddress: walletAddress,
     });
     return res.data;
   } catch (error) {
@@ -46,16 +14,10 @@ export const connectWallet = async (walletAddress) => {
   }
 };
 
-// BET >> PLACE BID
-export const placeBid = async (placeBidData, walletAddress, token) => {
-
+// START BIDDING
+export const startBidding = async (token) => {
   try {
-    const res = await axios.post(BASE_URL + "/placeBidMethod", {
-      walletAddress: walletAddress,
-      amount: placeBidData?.minimumBid,
-      number: placeBidData?.bidNo,
-    },
-    {
+    const res = await axios.post(BASE_URL + "/startBiddingAdmin", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -66,23 +28,11 @@ export const placeBid = async (placeBidData, walletAddress, token) => {
   }
 };
 
-// SENSEX CHART API
-export const sensexChartData = async (today, yesterday) => {
-  try {
-    const res = await axios.get(
-      `${BASE_URL}/proxy?today=${today}&yesterday=${yesterday}`
-    );
-    return res?.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-// GET WINNING BALANCE OF THE USER
-export const getWinningBalance = async (walletAddress, token) => {
+// END BIDDING
+export const endBidding = async (walletAddress, token) => {
   try {
     const res = await axios.post(
-      BASE_URL + "/getTotalWinning",
+      BASE_URL + "/endBiddingAdmin",
       {
         walletAddress: walletAddress,
       },
@@ -92,36 +42,45 @@ export const getWinningBalance = async (walletAddress, token) => {
         },
       }
     );
-
     return res?.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-//  SIGNOUT
-export const signout = async (token) => {
+// SUMBIT WINNING NUMBER
+export const submitWinningNumber = async(winningNo, walletAddress, token)=>{
   try {
-    const res = await axios.get(BASE_URL + "/logout", {
+    const res = await axios.post(BASE_URL + "/submitWinningNumberAdmin",{
+       "number": winningNo,
+    "walletAddress": walletAddress
+    },{
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
+    })
     return res?.data;
   } catch (error) {
     console.log(error);
   }
-};
+}
 
-// GET FAQs LIST
-export const getFAQsList = async () => {
+// STIMULATE WINNING NUMBER
+export const stimulateWinningNumber = async(winningNo, token)=>{
+  console.log(winningNo, token)
   try {
-    const res = await axios.get(BASE_URL + "/getFaq");
+    const res = await axios.post(BASE_URL + "/simulateWinningNumberAdmin",{
+       "number": winningNo,
+    },{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     return res?.data;
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 // GET APPROVAL
 export const getApproval = async (walletAddress, amount) => {
@@ -136,32 +95,90 @@ export const getApproval = async (walletAddress, amount) => {
   }
 };
 
-// GET TOTAL WINNING COUNT
-export const getWinningCount = async()=>{
+// GET ALL USERS
+export const getAllUsers = async (token)=>{
   try {
-    const res = await axios.get(BASE_URL + "/getWinnerCountMethod");
+    const res = await axios.get(BASE_URL + "/getAllUser",{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     return res?.data;
   } catch (error) {
     console.log(error);
   }
 }
 
-// GET WINNERS BY INDEX
-export const getWinnersByIndex = async(index)=>{
+// GET USER BY ID
+export const getUserById = async(id, token)=>{
   try {
-    const res = await axios.get(BASE_URL + `getWinners/${index}`)
+    const res = await axios.get(BASE_URL + `/getUserById/${id}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     return res?.data;
   } catch (error) {
     console.log(error)
   }
 }
 
-// GET CURRENY BIDDING LIST
-export const getBiddingList = async()=>{
+// USER BLOCK AND UNBLOCK
+export const getUserBlockAndUnblock = async(id, token)=>{
   try {
-    const res = await axios.get(BASE_URL + "/getCurrentBidding");
+    const res = await axios.get(BASE_URL + `/blockUnblockUser/${id}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     return res?.data;
   } catch (error) {
     console.log(error)
+  }
+}
+
+// DELETE THE USER
+export const getUserDelete = async(id, token)=>{
+  try {
+    const res = await axios.delete(BASE_URL + `/deleteUser/${id}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res?.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// UPDATE USER DETAILS
+export const getUserDetailsUpdate= async(token)=>{
+  try {
+    const res = await axios.put(BASE_URL + "/updateUser",{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res?.data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// SET MULTIPLIER
+export const setMultiplier = async (digit, multiplier, walletAddress, token)=>{
+  try {
+    const res = await axios.post(BASE_URL + "/setMultiplierAdmin",{
+      "digits": digit,
+      "multiplier": multiplier,
+      "walletAddress": walletAddress
+    },{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res?.data;
+  } catch (error) {
+    console.log(error);
   }
 }

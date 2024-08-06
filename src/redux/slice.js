@@ -7,7 +7,6 @@ const walletSlice = createSlice({
     Network:"",
     login:false,
     signup:false,
-    balanceUSDX:"",
     token:"",
     email:"",
   },
@@ -24,9 +23,6 @@ const walletSlice = createSlice({
     setSignup: (state, action) => {
       state.signup = action.payload;
     },
-    setBalanceUSDX: (state, action) => {
-        state.balanceUSDX = action.payload;
-      },
     setToken: (state, action) => {
         state.token = action.payload;
       },

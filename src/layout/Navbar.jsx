@@ -1,11 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo_lucky.png";
-import { FaUserCircle } from "react-icons/fa";
 import { HiMenu } from "react-icons/hi";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signout } from "../utils/Axios";
-import { setBalanceUSDX, setEmail, setSignup, setToken, setWalletAddress } from "../redux/slice";
+import { setEmail, setSignup, setToken, setWalletAddress } from "../redux/slice";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -14,7 +12,6 @@ const Navbar = () => {
   const isUserSignup = useSelector((state)=>state.wallet.signup);
   const mobileSignup = isUserSignup ? "true" : "false";
   const walletAddress = useSelector((state)=>state.wallet.address)
-  const token = useSelector((state)=>state.wallet.token);
 
   function truncateString(str, startChars = 6, endChars = 6, separator = '...') {
     if (str.length <= startChars + endChars) {
@@ -30,11 +27,9 @@ const Navbar = () => {
   const handleSignupAndSignup = async () => {
     if (isUserSignup) {
       try {
-        await signout(token);
         dispatch(setToken(""));
         dispatch(setWalletAddress(""));
         dispatch(setEmail(""));
-        dispatch(setBalanceUSDX(""))
         dispatch(setSignup(!isUserSignup));
         navigate("/wallet");
       } catch (error) {
@@ -59,13 +54,9 @@ const Navbar = () => {
           </div>
         </Link>
         <div className="flex flex-row items-center space-x-8">
-          <Link to="/balance">
-            <p className="text-white font-bold cursor-pointer">Balance</p>
+          <Link to="/admin/dashboard">
+            <p className="text-white font-bold cursor-pointer">Dashboard</p>
           </Link>
-          <Link to="/faqs">
-            <p className="text-white font-bold cursor-pointer">FAQ's</p>
-          </Link>
-
             <button
               type="button"
               className="bg-white py-2 px-4 w-full text-center font-bold rounded-xl text-black focus:outline-none"
@@ -82,14 +73,6 @@ const Navbar = () => {
               {walletAddress.length>0 ? truncateString(walletAddress):"Connect Wallet"}
             </button>
             </Link>
-
-          {isUserSignup && (
-            <Link to="/user">
-              <div className="cursor-pointer">
-                <FaUserCircle color="white" size={28} />
-              </div>
-            </Link>
-          )}
         </div>
       </div>
 
@@ -112,25 +95,11 @@ const Navbar = () => {
 
         {showNavbar && (
           <div className="flex flex-col w-[200px] bg-white text-black py-4 space-y-4 absolute top-16 right-4 z-20 rounded-lg shadow-lg">
-            {isUserSignup && (
-              <Link
-                to="/user"
-                className="px-4 py-2  hover:bg-gray-200 rounded-lg transition"
-              >
-                <FaUserCircle size={28} />
-              </Link>
-            )}
             <Link
-              to="/balance"
+              to="/admin/dashboard"
               className="px-4 py-2 font-semibold hover:bg-gray-200 rounded-lg transition"
             >
               Balance
-            </Link>
-            <Link
-              to="/faqs"
-              className="px-4 py-2 font-semibold hover:bg-gray-200 rounded-lg transition"
-            >
-              FAQ's
             </Link>
             <p
               to="/signup"

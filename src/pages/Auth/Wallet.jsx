@@ -12,47 +12,43 @@ const Wallet = () => {
   const signupStatus = useSelector((state)=>state.wallet.signup);
 
    // Connect polink wallet
-async function getPolinkweb() {
-  if(walletAddress){
-    return toast.warning("Wallet is already connected")
+   async function getPolinkweb() {
+    if(walletAddress){
+      return toast.warning("Wallet is already connected")
+    }
+    return new Promise((resolve, reject) => {
+      const obj = setInterval(async () => {
+        if (window.pox) {
+          clearInterval(obj);
+          try {
+            const detailsData = JSON.stringify(await window.pox.getDetails());
+            const parsedDetailsObject = JSON.parse(detailsData);
+            resolve(parsedDetailsObject[1]?.data);
+          } catch (error) {
+            reject(error);
+          }
+        }
+      }, 1000);
+    });
   }
-  return new Promise((resolve, reject) => {
-    const obj = setInterval(async () => {
-      if (window.pox) {
-        clearInterval(obj);
-        try {
-          const detailsData = JSON.stringify(await window.pox.getDetails());
-          const parsedDetailsObject = JSON.parse(detailsData);
-          // if()
-          dispatch(setBalanceUSDX(parsedDetailsObject[1]?.data?.USDX))
-          dispatch(setWalletAddress(parsedDetailsObject[1]?.data?.wallet_address))
-          dispatch(setSignup(!signupStatus));
-          resolve(parsedDetailsObject[1]?.data?.wallet_address);
-        } catch (error) {
-          reject(error);
+  
+  const handleLogin = async () => {
+    try {
+      const dataArray = await getPolinkweb();
+      if (dataArray?.wallet_address) {
+        const apiData = await connectWallet(dataArray?.wallet_address);
+        console.log(apiData)
+        if(apiData?.statusCode==200){
+         dispatch(setToken(apiData?.data?.token));
+         dispatch(setWalletAddress(dataArray?.wallet_address))
+         dispatch(setSignup(!signupStatus));
+          navigate("/")
         }
       }
-    }, 1000);
-  });
-}
-
-const handleLogin = async () => {
-  try {
-    const walletAddress = await getPolinkweb();
-    if (walletAddress) {
-      const apiData = await connectWallet(walletAddress);
-      if(apiData?.statusCode==200){
-       dispatch(setToken(apiData?.data?.token));
-        navigate("/")
-      }else{
-        toast.error("Wallet address is not registered.")
-        navigate("/signup")
-      }
+    } catch (error) {
+      console.error("Error during login:", error);
     }
-  } catch (error) {
-    console.error("Error during login:", error);
-  }
-};
+  };
 
   return (
     <div className="bg-gradient-to-r from-[#58A0A6] to-[#C89D42] text-white flex justify-center items-center min-h-screen">

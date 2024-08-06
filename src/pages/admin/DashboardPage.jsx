@@ -1,7 +1,6 @@
 import UserImg from "../../assets/Group.png";
 import UserGraphImg from "../../assets/UserGraph.png";
 import { FaArrowUpLong } from "react-icons/fa6";
-import { FaArrowDownLong } from "react-icons/fa6";
 import DailyUserGraph from "../../assets/DailyUserGraph.png"
 import BidGraph from "../../assets/BidGraph.png";
 import BidImage from "../../assets/BidImg.png";
@@ -19,7 +18,7 @@ const DashboardPage = () => {
     <div  className=" bg-black min-h-screen">
 
         <div className="flex flex-row mt-10 space-x-12">
-            <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-5">
+            <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-5 w-[20%]">
                 <div className="flex flex-row justify-between space-x-10 items-center">
                     <div>
                         <img src={UserImg} 
@@ -38,7 +37,7 @@ const DashboardPage = () => {
             </div>
 
 
-            <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-5">
+            <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-5 w-[20%]">
                 <div className="flex flex-row justify-between space-x-10 items-center">
                     <div>
                         <img src={UserImg} alt="daily user " />
@@ -57,7 +56,7 @@ const DashboardPage = () => {
             </div>
 
 
-            <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-4">
+            <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-4 w-[20%]">
                 <div className="flex flex-row justify-between space-x-10 items-center">
                     <div>
                         <img src={BidImage} 
@@ -70,8 +69,8 @@ const DashboardPage = () => {
                 </div>
                 <p  className="text-[#808080] font-semibold mt-2">Total User</p>
                 <div className="flex flex-row mt-2">
-                    <p  className="pt-1 text-[#DC2430]"><FaArrowDownLong  size={14}/></p>
-                    <p> <span className="text-[#DC2430]  font-semibold">46%</span> <span className="text-[#B5B5B5]">increase in today</span> </p>
+                    <p  className="pt-1 text-[#2E8626]"><FaArrowUpLong  size={14}/></p>
+                    <p> <span className="text-[#2E8626]  font-semibold">26%</span> <span className="text-[#B5B5B5]">increase in today</span> </p>
                 </div>
             </div>
         </div>
@@ -97,7 +96,7 @@ const DashboardPage = () => {
                 {isShow && (
               <div
                 className="origin-top-right absolute right-0 top-10 mt-2 w-40 rounded-md shadow-lg
-               bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+               bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-40"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="options-menu"

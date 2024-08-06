@@ -1,11 +1,9 @@
 import Search from "./Search";
 import Pagination from "./Pagination";
-import UserTable from "./UserTable";
-import SensexValue from "./SensexValue";
+import ToggleButton from "./ToggleButton";
 
 export {
     Search,
     Pagination,
-    UserTable,
-    SensexValue,
+    ToggleButton
 }
