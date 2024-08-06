@@ -1,11 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo_lucky.png";
-import { FaUserCircle } from "react-icons/fa";
 import { HiMenu } from "react-icons/hi";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signout } from "../utils/Axios";
-import { setBalanceUSDX, setEmail, setSignup, setToken, setWalletAddress } from "../redux/slice";
+import { setEmail, setSignup, setToken, setWalletAddress } from "../redux/slice";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -14,7 +12,6 @@ const Navbar = () => {
   const isUserSignup = useSelector((state)=>state.wallet.signup);
   const mobileSignup = isUserSignup ? "true" : "false";
   const walletAddress = useSelector((state)=>state.wallet.address)
-  const token = useSelector((state)=>state.wallet.token);
 
   function truncateString(str, startChars = 6, endChars = 6, separator = '...') {
     if (str.length <= startChars + endChars) {
@@ -30,11 +27,9 @@ const Navbar = () => {
   const handleSignupAndSignup = async () => {
     if (isUserSignup) {
       try {
-        await signout(token);
         dispatch(setToken(""));
         dispatch(setWalletAddress(""));
         dispatch(setEmail(""));
-        dispatch(setBalanceUSDX(""))
         dispatch(setSignup(!isUserSignup));
         navigate("/wallet");
       } catch (error) {

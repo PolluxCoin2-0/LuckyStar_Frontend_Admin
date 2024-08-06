@@ -164,3 +164,21 @@ export const getUserDetailsUpdate= async(token)=>{
     console.log(error)
   }
 }
+
+// SET MULTIPLIER
+export const setMultiplier = async (digit, multiplier, walletAddress, token)=>{
+  try {
+    const res = await axios.post(BASE_URL + "/setMultiplierAdmin",{
+      "digits": digit,
+      "multiplier": multiplier,
+      "walletAddress": walletAddress
+    },{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res?.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

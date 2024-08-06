@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import {
   endBidding,
   getApproval,
+  setMultiplier,
   startBidding,
   stimulateWinningNumber,
   submitWinningNumber,
@@ -13,6 +14,8 @@ const BiddingPage = () => {
   const token = useSelector((state) => state.wallet.token);
   const [winningNo, setWinningNo] = useState(0);
   const [stimulateWinningNumberData, setStimulateWinningNumberData] = useState(0);
+  const [digit, setDigit] = useState(0);
+  const [multiplierValue, setMultiplierValue] = useState(0);
 
   const handleStartBidding = async () => {
     const apiData = await startBidding(token);
@@ -35,6 +38,7 @@ const BiddingPage = () => {
   const handleWinningNumber = async () => {
     // length 5
     const apiData = await stimulateWinningNumber(winningNo, token);
+    setStimulateWinningNumberData(apiData?.data);
     console.log(apiData);
 
     const transaction = await getApproval(walletAddress, apiData?.data);
@@ -57,6 +61,12 @@ const BiddingPage = () => {
       await window.pox.broadcast(JSON.parse(signedTransaction2[1]))
     );
   };
+
+  const handleSetmultiplier = async ()=>{
+    const apiData = await setMultiplier(digit, multiplierValue, walletAddress, token)
+    setDigit(0);
+    setMultiplierValue(0);
+  }
 
   return (
     <div className="px-24 bg-black min-h-screen">
@@ -113,7 +123,39 @@ const BiddingPage = () => {
           </p>
         </div>
       </div>
+      <div className="mt-5 pt-6 pb-12">
+        <p className="text-white text-3xl font-semibold">Set Multiplier</p>
+        <div className="flex flex-col items-start bg-gray-800 p-8 rounded-lg shadow-lg max-w-lg mx-auto mt-10">
+      <div className="w-full mb-6">
+        <label className="block text-white text-lg font-semibold mb-2" htmlFor="digit">Digit</label>
+        <input
+          type="number"
+          id="digit"
+          className="w-full py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          placeholder="Enter digit"
+          value={digit}
+          onChange={(e) => setDigit(e.target.value)}
+        />
+      </div>
       
+      <div className="w-full mb-6">
+        <label className="block text-white text-lg font-semibold mb-2" htmlFor="multiplier">Multiplier</label>
+        <input
+          type="number"
+          id="multiplier"
+          className="w-full py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          placeholder="Enter multiplier"
+          value={multiplierValue}
+          onChange={(e) => setMultiplierValue(e.target.value)}
+        />
+      </div>
+      
+      <button onClick={handleSetmultiplier}
+      className="w-full py-3 mt-4 text-lg font-semibold text-white bg-gradient-to-r from-[#FF4B00] to-[#CFC800] rounded-md hover:from-orange-600 hover:to-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+        Submit
+      </button>
+    </div>
+      </div>
     </div>
   );
 };
