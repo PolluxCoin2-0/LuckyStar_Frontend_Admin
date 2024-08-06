@@ -1,16 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
-  Balance,
-  Faqs,
-  Home,
   OTP,
   Signup,
-  UserData,
   Wallet,
-  Winner,
   BiddingPage,
   Dashboard,
-  Contactus,
 } from "./pages";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
@@ -36,17 +30,11 @@ function App() {
             transition={Zoom}
           />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<BiddingPage />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/otp" element={<OTP />} />
             <Route path="/wallet" element={<Wallet />} />
-            <Route path="/winner" element={<Winner />} />
-            <Route path="/faqs" element={<Faqs />} />
-            <Route path="/balance" element={<Balance />} />
-            <Route path="/user" element={<UserData />} />
-            <Route path="/admin/bidding" element={<BiddingPage />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/contactus" element={<Contactus />} />
           </Routes>
           <Footer />
         </Router>

@@ -97,7 +97,7 @@ const DashboardPage = () => {
                 {isShow && (
               <div
                 className="origin-top-right absolute right-0 top-10 mt-2 w-40 rounded-md shadow-lg
-               bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+               bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-40"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="options-menu"
