@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+.react-tel-input .form-control {
+    background-color: black; /* Black background for input */
+    width: 100%;
+    padding: 12px 50px; /* Adjust padding as needed */
+    height: 52px;
+    border-radius: 8px; /* Rounded corners */
+    border: solid 1px rgba(255, 255, 255, 0.3); /* Light border color */
+    color: white; /* Text color */
+}
+
+.react-tel-input .form-control:focus-visible {
+    border: solid 1px rgba(255, 255, 255, 1); /* Border color on focus */
+}
+
+.flag-dropdown {
+    border-top-left-radius: 8px !important; /* Rounded top-left corner */
+    border-bottom-left-radius: 8px !important; /* Rounded bottom-left corner */
+    border: solid 1px rgba(255, 255, 255, 0.3); /* Light border color */
+    background-color: black !important; /* Black background for dropdown */
+}
+
+.react-tel-input .selected-flag:hover, .react-tel-input .selected-flag:focus {
+    border-top-left-radius: 8px !important; /* Rounded top-left corner */
+    border-bottom-left-radius: 8px !important; /* Rounded bottom-left corner */
+    border: solid 1px rgba(255, 255, 255, 0); /* Light border color */
+    background-color: black !important; /* Black background for dropdown */
+}
+
+ul.country-list {
+    background-color: white !important; 
+    color: black !important; 
+}
+
+ul.country-list:hover {
+    background-color: white !important;
+    color: black !important; 
+}
+
+.bgimage{
+    background-image: url("./assets/BGImage.png");
+    background-position: center;
+    background-size: contain;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  .live-indicator {
+    animation: blink 2s infinite;
+  }
+
+
+  .p-inputtext .p-component .p-inputtext .p-component{
+    outline: none !important;
+ }
+  
