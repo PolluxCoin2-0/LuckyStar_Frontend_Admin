@@ -15,9 +15,11 @@ export const connectWallet = async (walletAddress) => {
 };
 
 // START BIDDING
-export const startBidding = async (token) => {
+export const startBidding = async (token, walletAddress) => {
   try {
     const res = await axios.post(BASE_URL + "/startBiddingAdmin", {
+      walletAddress:walletAddress
+    }, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

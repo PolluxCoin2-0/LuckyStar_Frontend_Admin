@@ -25,7 +25,7 @@ const Dashboard = () => {
       }
     };
   return (
-    <div  className="px-24 bg-black min-h-screen ">
+    <div  className="px-24 bg-black min-h-screen bgimage">
 
       <div className="flex flex-row items-center pt-12 space-x-5 ">
         <p className={`  px-10 py-3 rounded-lg font-semibold whitespace-nowrap
