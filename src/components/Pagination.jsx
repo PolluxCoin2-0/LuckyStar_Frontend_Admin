@@ -2,7 +2,7 @@ import ReactPaginate from 'react-paginate';
 import { useMemo } from 'react';
 
 const Pagination = ({ totalPages, onPageChange }) => {
-  const totalPageNumbers = useMemo(() => Math.ceil(50 / 10), [totalPages]);
+  const totalPageNumbers = useMemo(() => Math.ceil(totalPages / 10), [totalPages]);
 
   const handlePageClick = (data) => {
     const selectedPage = data.selected + 1;
@@ -14,7 +14,7 @@ const Pagination = ({ totalPages, onPageChange }) => {
       <ReactPaginate
         previousLabel={
           <svg
-            className="shrink-0 size-4.5"
+            className="shrink-0 w-4.5 h-4.5"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -30,7 +30,7 @@ const Pagination = ({ totalPages, onPageChange }) => {
         }
         nextLabel={
           <svg
-            className="shrink-0 size-4.5"
+            className="shrink-0 w-4.5 h-4.5"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -51,11 +51,11 @@ const Pagination = ({ totalPages, onPageChange }) => {
         pageRangeDisplayed={5}
         onPageChange={handlePageClick}
         containerClassName="flex items-center gap-x-2"
-        pageClassName="min-h-[38px] min-w-[38px] flex justify-center items-center py-2 px-3 text-sm rounded-lg bg-white text-black hover:bg-gray-200 hover:text-black"
+        pageClassName="min-h-[38px] min-w-[38px] flex justify-center items-center py-2 px-3 text-sm rounded-lg bg-white text-black hover:bg-gray-100 hover:text-black"
         pageLinkClassName="w-full h-full flex items-center justify-center"
-        previousClassName="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg bg-white text-black hover:bg-gray-200"
-        nextClassName="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg bg-white text-black hover:bg-gray-200"
-        activeClassName="bg-black text-white rounded-lg"
+        previousClassName="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg bg-white text-black hover:bg-gray-100"
+        nextClassName="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg bg-white text-black hover:bg-gray-100"
+        activeClassName="bg-gray-200 text-black rounded-lg"
         disabledClassName="opacity-50 pointer-events-none"
       />
     </nav>
