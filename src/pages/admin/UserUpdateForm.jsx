@@ -2,9 +2,13 @@
 import { RxCross2 } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getUserById } from "../../utils/Axios";
+import { getUserById, getUserDetailsUpdate } from "../../utils/Axios";
 
-const UserUpdateForm = ({ setUpdateDetailOfUser, updateDetailOfUser, currentUserId }) => {
+const UserUpdateForm = ({
+  setUpdateDetailOfUser,
+  updateDetailOfUser,
+  currentUserId,
+}) => {
   const token = useSelector((state) => state.wallet.token);
   const [userData, setUserData] = useState({});
 
@@ -13,24 +17,21 @@ const UserUpdateForm = ({ setUpdateDetailOfUser, updateDetailOfUser, currentUser
   }, [currentUserId]);
 
   const userDetailsById = async (id) => {
-    const apiData = await getUserById(id, token);
+    const apiData = await getUserById(id, token, userData);
     setUserData(apiData?.data);
   };
-
-  console.log(userData)
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setUserData({
       ...userData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
   const handleUpdateUser = async () => {
-    // Call an update API here with updated userData
+    await getUserDetailsUpdate(token, currentUserId, userData);
     setUpdateDetailOfUser(!updateDetailOfUser);
-    console.log("Updated Data:", userData);
   };
 
   return (
@@ -56,13 +57,17 @@ const UserUpdateForm = ({ setUpdateDetailOfUser, updateDetailOfUser, currentUser
               { label: "State", name: "state", type: "text" },
               { label: "Pincode", name: "zipCode", type: "text" },
               { label: "Referral", name: "referredBy", type: "text" },
-              { label: "Blocked", name: "isBlocked", type: "checkbox" },
-              { label: "Verified Email", name: "isEmailVerify", type: "checkbox" },
-              { label: "Wallet Address", name: "walletAddress", type: "text", isWide: true },
-              { label: "Referral Code", name: "referralCode", type: "text" },
-              { label: "Referral Amount", name: "referralAmount", type: "text" },
+              {
+                label: "Wallet Address",
+                name: "walletAddress",
+                type: "text",
+                isWide: true,
+              },
             ].map(({ label, name, type, isWide }) => (
-              <div className={`mb-4 ${isWide ? 'col-span-1 sm:col-span-2' : ''}`} key={name}>
+              <div
+                className={`mb-4 ${isWide ? "col-span-1 sm:col-span-2" : ""}`}
+                key={name}
+              >
                 <p className="font-semibold text-black text-xl pb-2">{label}</p>
                 {type === "checkbox" ? (
                   <input

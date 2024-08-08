@@ -2,7 +2,6 @@ import { useState } from "react";
 import DashboardPage from "./DashboardPage";
 import ManageUsersPage from "./ManageUsersPage";
 import ManageFAQPage from "./ManageFAQPage";
-import AboutUsPage from "./AboutUsPage";
 import ManageSupport from "./ManageSupport";
 
 const Dashboard = () => {
@@ -16,8 +15,6 @@ const Dashboard = () => {
           return <ManageUsersPage/>;
         case "Manage FAQ's":
             return <ManageFAQPage/>;
-        case "About Us":
-            return <AboutUsPage />;
         case "Manage Support":
               return <ManageSupport />;
         default:
@@ -47,12 +44,6 @@ const Dashboard = () => {
         : "bg-white text-slate-500"}`}
           onClick={() => setIsRender("Manage FAQ's")}>Manage FAQ's</p>
 
-        <p className={`  px-10 py-3 rounded-lg font-semibold whitespace-nowrap
-        ${isRender === "About Us"
-        ? "bg-gradient-to-r from-[#FF4B00] to-[#CFC800] text-white"
-        : "bg-white text-slate-500"}`}
-          onClick={() => setIsRender("About Us")}>About Us</p>
-          
           <p className={`  px-10 py-3 rounded-lg font-semibold whitespace-nowrap
         ${isRender === "Manage Support"
         ? "bg-gradient-to-r from-[#FF4B00] to-[#CFC800] text-white"
