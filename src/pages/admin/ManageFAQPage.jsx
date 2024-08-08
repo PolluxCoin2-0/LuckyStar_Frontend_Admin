@@ -116,7 +116,7 @@ const ManageFAQPage = () => {
                 onClick={() => handleDeleteFaq(faq._id)}
                 className="ml-4 focus:outline-none"
               >
-                <MdDelete color="red" size={24} />
+                <MdDelete color="#ff5252" size={32} className="hover:animate-tada" />
               </button>
             </div>
           ))}

@@ -7,7 +7,7 @@ import {
   stimulateWinningNumber,
   submitWinningNumber,
 } from "../../utils/Axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 const BiddingPage = () => {
@@ -21,7 +21,7 @@ const BiddingPage = () => {
 
   const handleStartBidding = async () => {
     const apiData = await startBidding(token, walletAddress);
-  
+
     const signedTransaction1 = await window.pox.signdata(
       apiData?.data?.transaction
     );
@@ -32,7 +32,7 @@ const BiddingPage = () => {
   };
 
   const handleEndBidding = async () => {
-   const apiData = await endBidding(walletAddress, token);
+    const apiData = await endBidding(walletAddress, token);
 
     const signedTransaction1 = await window.pox.signdata(
       apiData?.data?.transaction
@@ -43,19 +43,16 @@ const BiddingPage = () => {
     );
   };
 
-  useEffect(()=>{
-    const fetchStimulateNumber = async()=>{
-// length should be 5 of winning no.
-if(winningNo.length<5){
-  toast.error("Enter at least 5 digit number");
-  return;
-}
-const apiData = await stimulateWinningNumber(winningNo, token);
-setStimulateWinningNumberData(apiData?.data);
-console.log(apiData);
+  const fetchStimulateNumber = async () => {
+    // length should be 5 of winning no.
+    if (winningNo.length < 5) {
+      toast.error("Enter at least 5 digit number");
+      return;
     }
-    fetchStimulateNumber();
-  },[winningNo])
+    const apiData = await stimulateWinningNumber(winningNo, token);
+    setStimulateWinningNumberData(apiData?.data);
+    console.log(apiData);
+  };
 
   const handleWinningNumber = async () => {
     const transaction = await getApproval(walletAddress, winningNo);
@@ -129,34 +126,38 @@ console.log(apiData);
         <p className="text-white text-3xl font-semibold">Submit Winning No</p>
       </div>
 
-      <div className="flex flex-row justify-start items-center space-x-20 bg-white rounded-xl p-10 mt-5 ">
-        <div>
-          <p className="text-lg font-semibold text-slate-500 pb-4">
-            Winning No
+      <div className="flex flex-row justify-between items-center bg-white rounded-xl p-10 mt-5 shadow-lg space-x-10">
+        <div className="w-full">
+          <p className="text-lg font-semibold text-gray-700 pb-2">
+            Stimulation No
           </p>
           <input
             type="number"
             id="winningNo"
-            className="w-96 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-500 p-2"
-            placeholder="123456"
+            className="w-full py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 p-4 text-gray-700 placeholder-gray-400"
+            placeholder="Enter Stimulation Number"
             value={winningNo}
             onChange={(e) => setWinningNo(e.target.value)}
           />
-        </div>
-
-        <div>
           <button
-            className="w-96 py-3 font-semibold mt-10 bg-black text-white rounded-md hover:bg-[#1d1d1d] focus:outline-none"
-            onClick={handleWinningNumber}
+            className="w-full py-3 font-semibold mt-5 bg-gradient-to-r from-orange-500 to-yellow-400 text-white rounded-lg hover:from-orange-600 hover:to-yellow-500 transition-all focus:outline-none focus:ring-2 focus:ring-orange-300"
+            onClick={fetchStimulateNumber}
           >
-            Submit Winning Number
+            Start Stimulation
           </button>
         </div>
 
         <div className="w-full">
-          <p className="font-semibold text-xl mt-10 w-[40%] whitespace-nowrap h-11 bg-gray-100 border-gray-200 border-[1px] rounded-md py-[10px] px-2 text-center text-gray-600">
-            {stimulateWinningNumberData && stimulateWinningNumberData}
-          </p>
+          <p className="text-lg font-semibold text-gray-700 pb-2">Winning No</p>
+          <div className="flex justify-center items-center bg-gray-100 border-gray-200 border rounded-lg h-[45px] text-center text-xl text-gray-700">
+            {stimulateWinningNumberData ? stimulateWinningNumberData : "0"}
+          </div>
+          <button
+            className="w-full py-3 font-semibold mt-5 bg-gradient-to-r from-orange-500 to-yellow-400 text-white rounded-lg hover:from-orange-600 hover:to-yellow-500 transition-all focus:outline-none focus:ring-2 focus:ring-green-300"
+            onClick={handleWinningNumber}
+          >
+            Submit Winning Number
+          </button>
         </div>
       </div>
 
