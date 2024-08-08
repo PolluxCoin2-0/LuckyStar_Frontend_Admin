@@ -193,7 +193,7 @@ const ManageUsersPage = () => {
       )}
 
       {showDetailOfUser &&
-       <UserDetails data={userData && userData}/>}
+       <UserDetails data={userData && userData} setShowDetailOfUser={setShowDetailOfUser} showDetailOfUser={showDetailOfUser}/>}
     </div>
   );
 };

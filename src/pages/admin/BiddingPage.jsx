@@ -21,8 +21,7 @@ const BiddingPage = () => {
 
   const handleStartBidding = async () => {
     const apiData = await startBidding(token, walletAddress);
-    console.log("startBidding", apiData);
-
+  
     const signedTransaction1 = await window.pox.signdata(
       apiData?.data?.transaction
     );
@@ -33,8 +32,15 @@ const BiddingPage = () => {
   };
 
   const handleEndBidding = async () => {
-    const apiData = await endBidding(walletAddress, token);
-    console.log("startBidding", apiData);
+   const apiData = await endBidding(walletAddress, token);
+
+    const signedTransaction1 = await window.pox.signdata(
+      apiData?.data?.transaction
+    );
+
+    JSON.stringify(
+      await window.pox.broadcast(JSON.parse(signedTransaction1[1]))
+    );
   };
 
   const handleWinningNumber = async () => {
@@ -79,6 +85,15 @@ const BiddingPage = () => {
       walletAddress,
       token
     );
+
+    const signedTransaction1 = await window.pox.signdata(
+      apiData?.data?.transaction
+    );
+
+    JSON.stringify(
+      await window.pox.broadcast(JSON.parse(signedTransaction1[1]))
+    );
+    
     setDigit(0);
     setMultiplierValue(0);
   };
