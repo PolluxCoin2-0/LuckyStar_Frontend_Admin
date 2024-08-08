@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { ToggleButton } from "../../components";
-import Pagination from "../../components/Pagination"; 
+import Pagination from "../../components/Pagination";
 import {
   MdClose,
   MdOutlineDelete,
   MdOutlineEdit,
   MdOutlineRemoveRedEye,
 } from "react-icons/md";
-import { getAllUsers, getUserBlockAndUnblock, getUserById, getUserDelete } from "../../utils/Axios";
+import {
+  getAllUsers,
+  getUserBlockAndUnblock,
+  getUserById,
+  getUserDelete,
+} from "../../utils/Axios";
 import { useSelector } from "react-redux";
 import UserDetails from "./UserDetails";
+import UserUpdateForm from "./UserUpdateForm";
 
 const Tooltip = ({ children, content }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,7 +44,7 @@ const ManageUsersPage = () => {
   const [blockUnblockUser, setBlockUnblockUser] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(null);
-  const [ userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     const fetchDataFromApi = async () => {
@@ -59,21 +65,15 @@ const ManageUsersPage = () => {
   };
 
   const handleBlockUnblockUser = async () => {
-   await getUserBlockAndUnblock(currentUserId, token);
+    await getUserBlockAndUnblock(currentUserId, token);
     setBlockUnblockUser(!blockUnblockUser);
   };
 
-  const handleUpdateUser = async(id) => {
-   const apiData = await getUserById(id, token);
-    setUpdateDetailOfUser(!updateDetailOfUser);
-    console.log("update",apiData);
-  };
-
-  const userDetailsById = async(id)=>{
+    const userDetailsById = async (id) => {
     const apiData = await getUserById(id, token);
     setUserData(apiData?.data);
-    setShowDetailOfUser(!showDetailOfUser)
-  }
+    setShowDetailOfUser(!showDetailOfUser);
+  };
 
   return (
     <div className="pb-12">
@@ -108,8 +108,11 @@ const ManageUsersPage = () => {
               <p className="text-black w-[25%] text-center  ">
                 {data?.walletAddress}
               </p>
-              <p className="text-black  w-[15%] text-center ">+{data?.phone.slice(0,2)}{" "}{data?.phone.slice(2,data?.phone?.length)}</p>
-              <p className="text-black  w-[25%] text-center  ">{data?.email}</p>
+              <p className="text-black  w-[15%] text-center ">
+                +{data?.phone.slice(0, 2)}{" "}
+                {data?.phone.slice(2, data?.phone?.length)}
+              </p>
+              <p className="text-black w-[25%] text-center">{data?.email}</p>
               <div className="text-black  w-[20%] flex flex-row items-center justify-center space-x-5">
                 <Tooltip content="View Details">
                   <MdOutlineRemoveRedEye
@@ -126,10 +129,19 @@ const ManageUsersPage = () => {
                   />
                 </Tooltip>
                 <Tooltip content="Edit Details">
-                  <MdOutlineEdit size={24} className="cursor-pointer" onClick={() => handleUpdateUser(data?._id)}/>
+                  <MdOutlineEdit
+                    size={24}
+                    className="cursor-pointer"
+                    onClick={() => setUpdateDetailOfUser(!updateDetailOfUser)}
+                  />
                 </Tooltip>
                 <Tooltip content="Block/Unblock">
-                  <ToggleButton size={24} className="cursor-pointer" button={handleBlockUnblockUser} isBlocked={data?.isBlocked }/>
+                  <ToggleButton
+                    size={24}
+                    className="cursor-pointer"
+                    button={handleBlockUnblockUser}
+                    isBlocked={data?.isBlocked}
+                  />
                 </Tooltip>
               </div>
               <p
@@ -192,8 +204,15 @@ const ManageUsersPage = () => {
         </div>
       )}
 
-      {showDetailOfUser &&
-       <UserDetails data={userData && userData} setShowDetailOfUser={setShowDetailOfUser} showDetailOfUser={showDetailOfUser}/>}
+      {showDetailOfUser && (
+        <UserDetails
+          data={userData && userData}
+          setShowDetailOfUser={setShowDetailOfUser}
+          showDetailOfUser={showDetailOfUser}
+        />
+      )}
+
+      {updateDetailOfUser && <UserUpdateForm setUpdateDetailOfUser={setUpdateDetailOfUser} updateDetailOfUser={updateDetailOfUser} currentUserId={currentUserId}/>}
     </div>
   );
 };

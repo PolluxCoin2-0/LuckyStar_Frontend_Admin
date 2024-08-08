@@ -7,7 +7,7 @@ import {
   stimulateWinningNumber,
   submitWinningNumber,
 } from "../../utils/Axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const BiddingPage = () => {
@@ -43,17 +43,22 @@ const BiddingPage = () => {
     );
   };
 
-  const handleWinningNumber = async () => {
-    // length should be 5 of winning no.
-    if(winningNo.length<5){
-      toast.error("Enter at least 5 digit number");
-      return;
+  useEffect(()=>{
+    const fetchStimulateNumber = async()=>{
+// length should be 5 of winning no.
+if(winningNo.length<5){
+  toast.error("Enter at least 5 digit number");
+  return;
+}
+const apiData = await stimulateWinningNumber(winningNo, token);
+setStimulateWinningNumberData(apiData?.data);
+console.log(apiData);
     }
-    const apiData = await stimulateWinningNumber(winningNo, token);
-    setStimulateWinningNumberData(apiData?.data);
-    console.log(apiData);
+    fetchStimulateNumber();
+  },[winningNo])
 
-    const transaction = await getApproval(walletAddress, apiData?.data);
+  const handleWinningNumber = async () => {
+    const transaction = await getApproval(walletAddress, winningNo);
 
     const signedTransaction1 = await window.pox.signdata(
       transaction?.data?.transaction
@@ -69,6 +74,7 @@ const BiddingPage = () => {
       token
     );
     console.log("submitWinningNumber", apiDataWinningNumber);
+
     const signedTransaction2 = await window.pox.signdata(
       apiDataWinningNumber?.data?.transaction
     );
@@ -93,7 +99,7 @@ const BiddingPage = () => {
     JSON.stringify(
       await window.pox.broadcast(JSON.parse(signedTransaction1[1]))
     );
-    
+
     setDigit(0);
     setMultiplierValue(0);
   };
@@ -148,7 +154,7 @@ const BiddingPage = () => {
         </div>
 
         <div className="w-full">
-          <p className="font-semibold text-xl mt-10 w-[40%] whitespace-nowrap bg-gray-100 border-gray-200 border-[1px] rounded-md py-[10px] px-2 text-center text-gray-600">
+          <p className="font-semibold text-xl mt-10 w-[40%] whitespace-nowrap h-11 bg-gray-100 border-gray-200 border-[1px] rounded-md py-[10px] px-2 text-center text-gray-600">
             {stimulateWinningNumberData && stimulateWinningNumberData}
           </p>
         </div>

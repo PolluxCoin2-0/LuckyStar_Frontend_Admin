@@ -69,7 +69,6 @@ export const submitWinningNumber = async(winningNo, walletAddress, token)=>{
 
 // STIMULATE WINNING NUMBER
 export const stimulateWinningNumber = async(winningNo, token)=>{
-  console.log(winningNo, token)
   try {
     const res = await axios.post(BASE_URL + "/simulateWinningNumberAdmin",{
        "number": winningNo,

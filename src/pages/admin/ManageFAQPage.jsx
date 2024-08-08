@@ -59,12 +59,19 @@ const ManageFAQPage = () => {
           </div>
         </div>
       ))}
-      <div className="flex justify-center">
+      <div className="flex justify-center space-x-6">
         <button
           className="px-14 py-3 font-semibold mt-12 bg-white text-black rounded-lg hover:bg-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           onClick={handleAddFaqForm}
         >
-          Add
+          Add More
+        </button>
+
+        <button
+          className="px-14 py-3 mt-12 bg-gradient-to-r from-[#FF4B00] to-[#CFC800] text-white font-semibold rounded-lg hover:bg-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          onClick={handleAddFaqForm}
+        >
+          Submit
         </button>
       </div>
     </div>
