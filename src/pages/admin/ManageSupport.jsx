@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import Pagination from "../../components/Pagination";
 import { AiOutlineEye } from "react-icons/ai";
 import { MdDeleteOutline } from "react-icons/md";
-import { getAllTickets } from "../../utils/Axios";
+import { deleteTicket, getAllTickets } from "../../utils/Axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ManageSupport = () => {
   const token = useSelector((state) => state.wallet.token);
@@ -22,6 +23,14 @@ const ManageSupport = () => {
     };
     fetchQueryList();
   }, []);
+
+  const handleDeleteTicket = async(id)=>{
+    const apiData = await deleteTicket(token, id);
+    if(apiData?.statusCode===200){
+      toast.success("Query deleted successfully.")
+      return;
+    }
+  }
 
   return (
     <div className="pb-12">
@@ -45,7 +54,6 @@ const ManageSupport = () => {
         queryList?.ticket?.map((data, index) => {
           return (
             <>
-              <Link to={`/admin/dashboard/supportdetailspage/${data?._id}`}>
                 <div
                   key={index}
                   className={`flex flex-row justify-around items-center cursor-pointer p-5  ${
@@ -62,14 +70,16 @@ const ManageSupport = () => {
                     {data?.email}
                   </p>
                   <div className="text-black  w-[10%] flex justify-center items-center space-x-4">
-                    <AiOutlineEye size={20} className="cursor-pointer" />{" "}
-                    <MdDeleteOutline size={20} className="cursor-pointer" />
+              <Link to={`/admin/dashboard/supportdetailspage/${data?._id}`}>
+                    <AiOutlineEye size={20} className="cursor-pointer" />
+                    </Link>
+                    <MdDeleteOutline size={20} className="cursor-pointer" onClick={()=>handleDeleteTicket(data?._id)} />
                   </div>
                   <p className="text-black w-[10%] text-center ">
                     {data?.status}
                   </p>
                 </div>
-              </Link>
+           
             </>
           );
         })}

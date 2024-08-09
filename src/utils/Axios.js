@@ -316,3 +316,18 @@ export const postAddTicketAnswer = async (token, id, message) => {
 };
 
 // DELETE TICKET
+export const deleteTicket = async (token, id) => {
+  try {
+    const res = await axios.delete(
+      BASE_URL + `/deleteTicketById/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return res?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
