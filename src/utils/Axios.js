@@ -331,3 +331,17 @@ export const deleteTicket = async (token, id) => {
     console.log(error);
   }
 };
+
+// GET DASHBOARD DATA
+export const getDashboardData = async (token, interval) => {
+  try {
+    const res = await axios.get(BASE_URL + `/getDashboardData?user=${interval}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return res?.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

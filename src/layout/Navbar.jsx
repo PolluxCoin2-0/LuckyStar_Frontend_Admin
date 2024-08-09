@@ -54,6 +54,9 @@ const Navbar = () => {
           </div>
         </Link>
         <div className="flex flex-row items-center space-x-8">
+        <Link to="/">
+            <p className="text-white font-bold cursor-pointer">Bidding</p>
+          </Link>
           <Link to="/admin/dashboard">
             <p className="text-white font-bold cursor-pointer">Dashboard</p>
           </Link>
