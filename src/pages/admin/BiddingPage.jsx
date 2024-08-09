@@ -101,12 +101,12 @@ const BiddingPage = () => {
   };
 
   return (
-    <div className="px-24 bg-black min-h-screen bgimage">
+    <div className="px-4 md:px-4 lg:px-12 xl:px-24 2xl:px-24 bg-black min-h-screen bgimage">
       <div>
-        <p className="text-white text-3xl font-semibold pt-16">Bidding</p>
+        <p className="text-white text-3xl font-semibold pt-6 md:pt-16">Bidding</p>
       </div>
 
-      <div className="flex flex-row justify-between items-center space-x-12  bg-white rounded-xl p-10 mt-5 ">
+      <div className="flex flex-row justify-between items-center space-x-6 md:space-x-12  bg-white rounded-xl p-4 md:p-10 mt-5 ">
         <button
           className="bg-gradient-to-r from-[#FF4B00] to-[#CFC800] rounded-lg w-full py-4 text-xl font-bold text-white"
           onClick={handleStartBidding}
@@ -121,14 +121,14 @@ const BiddingPage = () => {
         </button>
       </div>
 
-      <div className="mt-5 pt-12">
-        <p className="text-white text-3xl font-semibold">Submit Winning No</p>
+      <div className="mt-5 pt-6 md:pt-12">
+        <p className="text-white text-2xl md:text-3xl font-semibold">Submit Winning No</p>
       </div>
 
-      <div className="flex flex-row justify-between items-center bg-white rounded-xl p-10 mt-5 shadow-lg space-x-10">
+      <div className="flex flex-col md:flex-row justify-between items-center bg-white rounded-xl p-4 md:p-10 mt-5 shadow-lg space-x-0 md:space-x-10">
         <div className="w-full">
           <p className="text-lg font-semibold text-gray-700 pb-2">
-            Stimulation No
+          Winning No
           </p>
           <input
             type="number"
@@ -147,7 +147,7 @@ const BiddingPage = () => {
         </div>
 
         <div className="w-full">
-          <p className="text-lg font-semibold text-gray-700 pb-2">Winning No</p>
+          <p className="text-lg font-semibold text-gray-700 pb-2">Stimulation No</p>
           <div className="flex justify-center items-center bg-gray-100 border-gray-200 border rounded-lg h-[45px] text-center text-xl text-gray-700">
             {stimulateWinningNumberData>0 ? stimulateWinningNumberData : "0"}
           </div>
@@ -163,7 +163,7 @@ const BiddingPage = () => {
       {/* SET MULTIPLIER */}
       <div className="mt-5 pt-6 pb-12 ">
         <p className="text-white text-3xl font-semibold">Set Multiplier</p>
-        <div className="flex flex-row items-center space-x-10 bg-white p-8 rounded-lg shadow-lg  mt-10 w-full">
+        <div className="flex flex-row items-center space-x-2 md:space-x-10 bg-white px-2 md:px-8 py-4 md:py-8 rounded-lg shadow-lg  mt-10 w-full">
           <div className="w-full mb-6">
             <label
               className="block text-slate-500 text-lg font-semibold mb-2"

@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <>
       {/* For md, xl, 2xl Navbar */}
-      <div className="hidden md:flex bg-black py-2 flex-row items-center justify-between px-4 lg:px-24">
+      <div className="hidden md:flex bg-black py-2 flex-row items-center justify-between px-4 lg:px-12 xl:px-12 2xl:px-24">
         <Link to="/">
           <div>
             <img
@@ -99,10 +99,16 @@ const Navbar = () => {
         {showNavbar && (
           <div className="flex flex-col w-[200px] bg-white text-black py-4 space-y-4 absolute top-16 right-4 z-20 rounded-lg shadow-lg">
             <Link
+              to="/"
+              className="px-4 py-2 font-semibold hover:bg-gray-200 rounded-lg transition"
+            >
+              Bidding
+            </Link>
+            <Link
               to="/admin/dashboard"
               className="px-4 py-2 font-semibold hover:bg-gray-200 rounded-lg transition"
             >
-              Balance
+              Dashboard
             </Link>
             <p
               to="/signup"
