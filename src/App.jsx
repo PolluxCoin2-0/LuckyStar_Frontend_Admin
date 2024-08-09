@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import SupportDetailsPage from "./pages/admin/SupportDetailsPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/" element={<BiddingPage />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/dashboard/supportdetailspage/:id" element={<SupportDetailsPage />} />
           </Routes>
           <Footer />
         </Router>

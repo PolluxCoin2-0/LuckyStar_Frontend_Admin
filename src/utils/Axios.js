@@ -268,9 +268,51 @@ export const deleteFaq = async (token, id) => {
 };
 
 // GET ALL TICKETS
+export const getAllTickets = async (token) => {
+  try {
+    const res = await axios.get(BASE_URL + "/getTickets", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // GET TICKETS BY USER ID
+export const getTicketDetailsById = async (token, id) => {
+  try {
+    const res = await axios.get(BASE_URL + `/getTicketsById/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // ADD REPLY
+export const postAddTicketAnswer = async (token, id, message) => {
+  try {
+    const res = await axios.post(
+      BASE_URL + `/addReply/${id}`,
+      {
+        message: message,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return res?.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // DELETE TICKET
