@@ -50,8 +50,7 @@ const BiddingPage = () => {
       return;
     }
     const apiData = await stimulateWinningNumber(winningNo, token);
-    setStimulateWinningNumberData(apiData?.data);
-    console.log(apiData);
+    setStimulateWinningNumberData(apiData?.data?.data);
   };
 
   const handleWinningNumber = async () => {
@@ -150,7 +149,7 @@ const BiddingPage = () => {
         <div className="w-full">
           <p className="text-lg font-semibold text-gray-700 pb-2">Winning No</p>
           <div className="flex justify-center items-center bg-gray-100 border-gray-200 border rounded-lg h-[45px] text-center text-xl text-gray-700">
-            {stimulateWinningNumberData && stimulateWinningNumberData ? stimulateWinningNumberData : "0"}
+            {stimulateWinningNumberData>0 ? stimulateWinningNumberData : "0"}
           </div>
           <button
             className="w-full py-3 font-semibold mt-5 bg-gradient-to-r from-orange-500 to-yellow-400 text-white rounded-lg hover:from-orange-600 hover:to-yellow-500 transition-all focus:outline-none focus:ring-2 focus:ring-green-300"
