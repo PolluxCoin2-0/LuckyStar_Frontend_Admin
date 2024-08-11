@@ -75,13 +75,11 @@ const DashboardPage = () => {
     fetchDashBoardData();
   }, [interval]); // Re-fetch data when interval changes
 
-  console.log("interval", interval)
-
   return (
     <div className="bg-black min-h-screen">
-      <div className="flex flex-row mt-10 space-x-12">
+      <div className="flex flex-col md:flex-row md:items-center mt-10 space-x-0 space-y-6 md:space-y-0 md:space-x-12">
         {/* Total User */}
-        <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-5 w-[20%]">
+        <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-5 w-full md:w-[33%] lg:w-[30%] xl:w-[25%] 2xl:w-[20%]">
           <div className="flex flex-row justify-between space-x-10 items-center">
             <div>
               <img src={UserImg} alt="user image" />
@@ -106,7 +104,7 @@ const DashboardPage = () => {
         </div>
 
         {/* Daily New User */}
-        <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-5 w-[20%]">
+        <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-5 w-full md:w-[33%] lg:w-[30%] xl:w-[25%] 2xl:w-[20%]">
           <div className="flex flex-row justify-between space-x-10 items-center">
             <div>
               <img src={UserImg} alt="daily user " />
@@ -132,7 +130,7 @@ const DashboardPage = () => {
         </div>
 
         {/* Total Bid */}
-        <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-4 w-[20%]">
+        <div className="bg-white h-auto p-5 rounded-xl shadow-xl px-4 w-full md:w-[33%] lg:w-[30%] xl:w-[25%] 2xl:w-[20%]">
           <div className="flex flex-row justify-between space-x-10 items-center">
             <div>
               <img src={BidImage} alt="user image" />
@@ -158,7 +156,7 @@ const DashboardPage = () => {
       </div>
 
       {/* Graph */}
-      <div>
+      <div className="pb-12">
         <div className="flex flex-row relative justify-between mt-10">
           <p className="text-white text-2xl font-semibold">Total User</p>
           <div>
@@ -213,7 +211,7 @@ const DashboardPage = () => {
         </div>
 
         <div className="bg-white rounded-xl shadow-xl mt-6 h-[610px] w-full">
-          <div className="flex items-center px-16 py-10 h-[600px] pt-16">
+          <div className="flex items-center px-0 md:px-0 py-6 h-[600px] pt-16">
             <LineChartComp data={chartData} xAxisKey={interval === "monthly" ? "month" : interval === "weekly" ? "week" : "day"}/>
           </div>
         </div>
