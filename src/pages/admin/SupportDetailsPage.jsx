@@ -27,8 +27,8 @@ const SupportDetailsPage = () => {
   };
 
   return (
-    <section className="flex items-center justify-center min-h-screen bg-gray-100 text-gray-900 py-12">
-      <div className="w-full max-w-4xl p-8 sm:p-10 lg:p-12 shadow-xl bg-white rounded-xl">
+    <section className="flex items-center justify-center min-h-screen bg-black text-gray-900 py-12 px-4 md:px-8 lg:px-0 bgimage">
+      <div className="w-full max-w-4xl p-0 sm:p-10 lg:p-12 shadow-xl bg-white rounded-xl">
         <div className="p-6 sm:p-8 lg:p-10">
           <h2 className="text-center text-gray-800 font-serif text-4xl font-semibold mb-8">
             Solve Query
@@ -40,11 +40,11 @@ const SupportDetailsPage = () => {
                 alt="user"
                 className="h-16 w-16 rounded-full shadow-md"
               />
-              <div className="text-center sm:text-left">
+              <div className="text-center sm:text-left w-full">
                 <p className="text-gray-800 font-bold text-xl">
                   {queryDetails?.email || "Loading..."}
                 </p>
-                <p className="text-gray-600 text-lg">
+                <p className="text-gray-600 text-lg break-words">
                   {queryDetails?.subject || "Loading..."}
                 </p>
               </div>
