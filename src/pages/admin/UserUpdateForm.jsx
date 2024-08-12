@@ -35,9 +35,9 @@ const UserUpdateForm = ({
   };
 
   return (
-    <div className="fixed overflow-y-auto z-10 backdrop-blur-sm min-h-screen w-full inset-0 flex justify-center items-center">
+    <div className="fixed overflow-y-auto z-10 backdrop-blur-sm min-h-screen w-full inset-0 flex justify-center items-center top-4 px-4 md:top-0 md:px-8 lg:px-0">
       <div className="w-full md:w-full lg:w-3/5 xl:w-3/5 2xl:w-3/5">
-        <div className="bg-white rounded-xl px-8 py-4">
+        <div className="bg-white rounded-xl px-8 pt-20 pb-8 md:pt-12 md:pb-4 lg:py-4">
           <div className="flex justify-between items-center">
             <p className="font-bold text-2xl tracking-wider pb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-[#FF4B00] to-[#CFC800]">
               UPDATE USER INFORMATION

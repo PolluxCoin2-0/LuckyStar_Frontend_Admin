@@ -33,8 +33,9 @@ const ManageSupport = () => {
   }
 
   return (
-    <div className="pb-12">
-      <div className="flex flex-row justify-around items-center w-full p-5 bg-[#FFBE2E] rounded-t-xl mt-10">
+  <div className="overflow-x-scroll">
+    <div className="pb-12 min-w-[1200px] ">
+      <div className="flex flex-row justify-around items-center w-full p-5 bg-[#FFBE2E] rounded-t-xl mt-10 overflow-x-scroll">
         <p className="text-black text-lg font-bold w-[20%]  text-center ">ID</p>
         <p className="text-black text-lg font-bold  w-[40%] text-center ">
           SUBJECT
@@ -46,7 +47,7 @@ const ManageSupport = () => {
           ACTION
         </p>
         <p className="text-black text-lg font-bold  w-[10%] text-center ">
-          ACCOUNT STATUS
+         STATUS
         </p>
       </div>
 
@@ -87,6 +88,7 @@ const ManageSupport = () => {
       <div className="bg-white rounded-b-xl">
         <Pagination totalPages={queryList?.ticketCount} />
       </div>
+    </div>
     </div>
   );
 };

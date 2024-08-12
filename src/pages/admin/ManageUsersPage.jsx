@@ -76,7 +76,8 @@ const ManageUsersPage = () => {
   };
 
   return (
-    <div className="pb-12">
+    <div className="overflow-x-scroll">
+    <div className="pb-12 min-w-[1650px]">
       <div className="flex flex-row justify-around items-center w-full p-5 bg-[#FFBE2E] rounded-t-xl mt-10">
         <p className="text-black text-lg font-bold w-[25%]  text-center   ">
           User Address
@@ -91,7 +92,7 @@ const ManageUsersPage = () => {
           Action
         </p>
         <p className="text-black text-lg font-bold  w-[15%] text-center   ">
-          Account Status
+         Status
         </p>
       </div>
 
@@ -100,7 +101,7 @@ const ManageUsersPage = () => {
           return (
             <div
               key={data?._id}
-              className={`flex flex-col md:flex-row justify-between items-center p-5   ${
+              className={`flex flex-row justify-between items-center p-5   ${
                 index % 2 !== 0 ? "bg-white" : "bg-slate-50"
               } `}
               onClick={() => handleUserDetails(data?._id)}
@@ -213,6 +214,7 @@ const ManageUsersPage = () => {
       )}
 
       {updateDetailOfUser && <UserUpdateForm setUpdateDetailOfUser={setUpdateDetailOfUser} updateDetailOfUser={updateDetailOfUser} currentUserId={currentUserId}/>}
+    </div>
     </div>
   );
 };

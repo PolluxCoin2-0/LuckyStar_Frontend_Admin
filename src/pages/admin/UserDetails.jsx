@@ -3,9 +3,9 @@ import { RxCross2 } from "react-icons/rx";
 
 const UserDetails = ({ data, setShowDetailOfUser, showDetailOfUser }) => {
   return (
-    <div className="fixed overflow-y-auto z-10 backdrop-blur-sm min-h-screen w-full inset-0 flex justify-center items-center">
+    <div className="fixed overflow-y-auto z-10 backdrop-blur-sm min-h-screen w-full inset-0 flex justify-center items-center top-8 md:top-4 px-4 md:px-4 lg:px-0">
       <div className="w-full md:w-full lg:w-3/5 xl:w-3/5 2xl:w-3/5">
-        <div className="bg-white rounded-xl px-8 py-4">
+        <div className="bg-white rounded-xl px-8 py-4 pt-[700px] md:pt-12 lg:pt-12 xl:pt-8 pb-8">
           <div className="flex justify-between items-center">
             <p className="font-bold text-2xl tracking-wider pb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-[#FF4B00] to-[#CFC800]">
               USER INFORMATION
