@@ -10,7 +10,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const [showNavbar, setShowNavbar] = useState(false);
   const isUserSignup = useSelector((state)=>state.wallet.signup);
-  const mobileSignup = isUserSignup ? "true" : "false";
   const walletAddress = useSelector((state)=>state.wallet.address)
 
   function truncateString(str, startChars = 6, endChars = 6, separator = '...') {
@@ -36,7 +35,7 @@ const Navbar = () => {
         console.error("Error during signout:", error);
       }
     } else {
-      navigate("/signup");
+      navigate("/wallet");
     }
   };
 
@@ -65,7 +64,7 @@ const Navbar = () => {
               className="bg-white py-2 px-4 w-full text-center font-bold rounded-xl text-black focus:outline-none"
               onClick={handleSignupAndSignup}
             >
-              {isUserSignup ? "Sign out" : "Signup"}
+              {isUserSignup ? "Logout" : "Login"}
             </button>
 
             <Link to="/wallet">
@@ -111,11 +110,10 @@ const Navbar = () => {
               Dashboard
             </Link>
             <p
-              to="/signup"
               className="px-4 py-2 font-semibold hover:bg-gray-200 rounded-lg transition"
               onClick={handleSignupAndSignup}
             >
-              {mobileSignup ? "Sign out" : "Signup"}
+              {isUserSignup ? "Logout" : "Login"}
             </p>
             <Link
               to="/wallet"
